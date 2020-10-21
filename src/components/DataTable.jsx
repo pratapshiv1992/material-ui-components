@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import LoadMore from './LoadMore';
 
 const useStyles = makeStyles({
@@ -27,10 +27,15 @@ const useStyles = makeStyles({
 });
 
 function DataTable(props) {
-    const {columns = [], rowData = [], firstLoad, onLoadMore, error} = props;
+    let {columns = [], rowData = [], onLoadMore, error} = props;
+    const [sortingOrder, setSortingOrder] = useState('ASC');
     const classes = useStyles();
 
-
+    const handleSorting = () => {
+        const order = sortingOrder == 'ASC' ? 'DESC' : 'ASC';
+        rowData = rowData.reverse();
+        setSortingOrder(order);
+    }
 
     return (
         <Paper className={classes.root}>
@@ -46,7 +51,10 @@ function DataTable(props) {
                                         className={classes.columnHeader}
                                     >
                                         {column.name}
-                                        <ArrowDropUp/>
+                                        {column.sorting && (sortingOrder == 'ASC' ?
+                                            <ArrowDropDownIcon onClick={handleSorting}/> :
+                                            <ArrowDropUpIcon onClick={handleSorting}/>)
+                                        }
                                     </TableCell>
                                 })
                             }
@@ -66,7 +74,7 @@ function DataTable(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <LoadMore onLoadMore={onLoadMore} error={error} />
+            <LoadMore onLoadMore={onLoadMore} error={error}/>
         </Paper>
     );
 }

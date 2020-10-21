@@ -1,6 +1,7 @@
 export const userTableHeaders = [
     {
         name: "Date",
+        sorting: true
     },
     {
         name: "User ID",
@@ -17,6 +18,7 @@ export const userTableHeaders = [
 export const projectTableHeaders = [
     {
         name: "Date",
+        sorting: true
     },
     {
         name: "Project ID",
