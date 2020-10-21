@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,8 +17,7 @@ const useStyles = makeStyles({
     },
     root: {
         width: "90%",
-        margin: "auto",
-        // height: "88vh"
+        margin: "auto"
     },
     columnHeader: {
         fontWeight: '600'
