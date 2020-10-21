@@ -37,9 +37,9 @@ function DataTable(props) {
     }
 
     return (
-        <Paper className={classes.root}>
+        <Paper className={classes.root} data-testid='data_table_root'>
             <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
+                <Table className={classes.table} aria-label="simple table" data-testid='data_table'>
                     <TableHead>
                         <TableRow>
                             {

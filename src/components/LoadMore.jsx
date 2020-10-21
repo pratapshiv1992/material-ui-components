@@ -25,8 +25,8 @@ const useStyles = makeStyles({
 
 
 const LoadMore = (props) => {
-    const [showLoader, setShowLoader] = useState(false);
-    const {onLoadMore, error} = props;
+    const {onLoadMore, error, isLoading = false} = props;
+    const [showLoader, setShowLoader] = useState(isLoading);
     const classes = useStyles();
 
     const onLoadMoreClick = (e) => {
@@ -47,10 +47,12 @@ const LoadMore = (props) => {
         {
             showLoader ?
                 <CircularProgress
+                    data-testid='circular_progress'
                     className={classes.circularProgress}
                 />
                 :
                 <Button
+                    data-testid='load_more_btn'
                     variant="contained"
                     color="primary"
                     className={classes.root}
